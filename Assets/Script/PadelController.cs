@@ -38,5 +38,6 @@ public class PadelController : MonoBehaviour
     private void moveopedal(Vector2 move)
     {
         rb.velocity = move;
+        Debug.Log("kecepatan padle" + move);
     }
 }
