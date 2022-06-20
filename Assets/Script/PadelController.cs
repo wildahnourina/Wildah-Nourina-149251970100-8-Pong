@@ -10,6 +10,12 @@ public class PadelController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public bool poweringupExtend;
+    public bool poweringupSpeed;
+
+    private float timer;
+    public int duration;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,6 +25,24 @@ public class PadelController : MonoBehaviour
     void Update()
     {
         moveopedal(GetInput());
+        if (poweringupExtend == true)
+        {
+            timer += Time.deltaTime;
+            if (timer > duration)
+            {
+                ResetExtend();
+                timer -= duration;
+            }
+        }
+        if (poweringupSpeed == true)
+        {
+            timer += Time.deltaTime;
+            if (timer > duration)
+            {
+                ResetSpeed();
+                timer -= duration;
+            }
+        }
     }
 
     private Vector2 GetInput()
@@ -38,6 +62,33 @@ public class PadelController : MonoBehaviour
     private void moveopedal(Vector2 move)
     {
         rb.velocity = move;
-        Debug.Log("kecepatan padle" + move);
+        //Debug.Log("kecepatan padle" + move);
+    }
+
+    
+    public void ExtendPedal()
+    {
+        poweringupExtend = true;
+        //Debug.Log("Pedal bertambah panjang");
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
+        //ResetExtend();
+    }
+
+    public void SpeedUpPedal()
+    {
+        poweringupSpeed = true;
+        speed = speed * 2;
+    }
+
+    private void ResetExtend()
+    {
+        poweringupExtend = false;
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, transform.localScale.z);
+    }
+
+    private void ResetSpeed()
+    {
+        poweringupSpeed = false;
+        speed = speed / 2;
     }
 }

@@ -10,9 +10,9 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Wildah Nourina Alfiani - 149251970100-8");
         SceneManager.LoadScene("Game");
     }
-    public void Author()
+    public void Credit()
     {
-        Debug.Log("Wildah Nourina");
+        SceneManager.LoadScene("Credit");
     }
     public void Quit()
     {
